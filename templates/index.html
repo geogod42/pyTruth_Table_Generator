@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth Table Generator</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            background-color: white;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: lightgray;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        function insertSymbol(symbol) {
+            const textbox = document.getElementById("expression");
+            textbox.value += symbol;
+        }
+    </script>
+</head>
+<body>
+    <h1>Truth Table Generator</h1>
+    <form method="POST">
+        <label for="expression">Enter Logical Expression:</label><br>
+        <input type="text" id="expression" name="expression" placeholder="e.g., ¬p → q ∨ (p ∧ r)" style="width: 80%;">
+        <br><br>
+
+        <!-- Buttons for logical operations -->
+        <button type="button" onclick="insertSymbol('∧')">∧ (AND)</button>
+        <button type="button" onclick="insertSymbol('∨')">∨ (OR)</button>
+        <button type="button" onclick="insertSymbol('¬')">¬ (NOT)</button>
+        <button type="button" onclick="insertSymbol('⊕')">⊕ (XOR)</button>
+        <button type="button" onclick="insertSymbol('→')">→ (IMPLIES)</button>
+        <button type="button" onclick="insertSymbol('↔')">↔ (EQUIVALENT)</button>
+        <br><br>
+
+        <button type="submit">Generate Truth Table</button>
+    </form>
+
+    {% if result_table %}
+    <h2>Truth Table</h2>
+    <table>
+        <thead>
+            <tr>
+                {% for var in variables %}
+                <th>{{ var }}</th>
+                {% endfor %}
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in result_table %}
+            <tr>
+                {% for value in row %}
+                <td>{{ 'T' if value else 'F' }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>
+
