@@ -14,8 +14,8 @@ This project is a simple web application for generating truth tables from logica
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/truth-table-generator.git
-   cd truth-table-generator
+   git clone https://github.com/geogod42/pyTruth_Table_Generator.git
+   cd pyTruth_Table_Generator
    ```
 
 2. Set up a virtual environment and install dependencies:
